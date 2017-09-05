@@ -1,0 +1,19 @@
+.toplevel_page_stripepress {
+	
+}
+
+.toplevel_page_stripepress #wpcontent, .toplevel_page_stripepress #wpwrap {
+	background-color: white;
+	font-family: 'Roboto';
+}
+
+.toplevel_page_stripepress thead {
+	border: none;
+}
+
+#stripepress_header {
+	min-height: 12em;
+}
+
+/* API KEYS PAGE */
+

@@ -76,7 +76,7 @@ class SP_Sub extends Stripepress {
 					"name" => "shipping",
 					"address" => array(
 						"line1" => sanitize_text_field($output['sttv_shipping_address1']),
-						"line2" => sanitize_text_field($output['sttv_shipping_address1']),
+						"line2" => sanitize_text_field($output['sttv_shipping_address2']),
 						"city" => sanitize_text_field($output['sttv_shipping_city']),
 						"state" => sanitize_text_field($output['sttv_shipping_state']),
 						"postal_code" => sanitize_text_field($output['sttv_shipping_pcode']),

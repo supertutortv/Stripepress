@@ -57,7 +57,7 @@
 		</div>
 	</div>
 </div>
-<?php //print_r($recon_keys); ?>
+
 <?php /*?>
 	<button class="btn key_tester">Test keys</button>
 	<div class="row sp-api-inner">

@@ -4,21 +4,11 @@ if ( ! defined( 'ABSPATH' ) ) {exit;}
 add_action( 'init' , array('SP_Events','stripe_events_handler'), 1 );
 class SP_Events {
 	
-	public static function stripe_events_setup() {
-		/**
-		 * Add root-level endpoint for handling stripe events
-		**/
-		//add_rewrite_endpoint( 'stripeevent', EP_ROOT );
-		
-		// and then finally flush them rules, baybay!
-		flush_rewrite_rules();
-	}
-	
 	public static function stripe_events_handler() {
 		if (!isset($_GET['stripeevent'])) { //end this function if GET var 'stripeevent' isn't set
 			return false;
 		}
-		//self::stripe_events_setup();
+	
 		date_default_timezone_set('America/Los_Angeles');
 		
 		$input = @file_get_contents("php://input");
@@ -26,14 +16,12 @@ class SP_Events {
 		if ($decoded['object'] !== 'event') // end function if 'object' doesn't equal 'event'
 			return false;
 		
-			
 		// set up Stripe environment
 		\Stripe\Stripe::setApiKey(Spress()->secret_key);
 		//$ep_sec = 'whsec_qgpr4DPFf4aOoo6HYzyoKehHMTZJgYf2'; //test
 		$ep_sec = 'whsec_KHUM6iWBhupnnmrwfxOnzt8bNzFz1rQc'; //live
 		$sig_header = @$_SERVER["HTTP_STRIPE_SIGNATURE"];
 		$event = null;
-		
 		
 		//catch any authentication errors
 		try {
@@ -52,14 +40,12 @@ class SP_Events {
 				'id'=>$decoded['id'],
 				'error'=>false
 			);
-
-		http_response_code(200);
-		$this_fuckin_guy = array('message'=>$kubrick);
 			
 		self::log_it($log_vars);
 
 		do_action('stripepress_events',$decoded['type'],$input);
 			
+		http_response_code(200);
 		echo wp_send_json('Thank you.');
 		
 		} catch(\UnexpectedValueException $e) {
@@ -117,7 +103,7 @@ class SP_Events {
 		die;
 	}
 	
-	protected static function log_it($vars = array()) {
+	private static function log_it($vars = array()) {
 		$suffix = $err = '';
 		if ($error) :
 			$err = "ERROR\t";

@@ -53,7 +53,7 @@ class SP_Sub extends Stripepress {
 			$ca_zips = json_decode(file_get_contents('https://gist.githubusercontent.com/enlightenedpie/99139b054dd9e4ad3f81689e2326d198/raw/69b654b47a01d2dc9e9ac34816c05ab5aa9ad355/ca_zips.json'));
 			$tax = 0;
 			if (in_array($b_ZIP,$ca_zips->losangeles)) :
-				$tax = 9;
+				$tax = 9.5;
 			else :
 				foreach ($ca_zips as $array) :
 					if (in_array($b_ZIP,$array)) :
@@ -100,7 +100,7 @@ class SP_Sub extends Stripepress {
 			if ($priority) :
 				\Stripe\InvoiceItem::create(array(
 					"customer" => $customerID,
-					"amount" => 1195,
+					"amount" => 1285,
 					"currency" => "usd",
 					"description" => "Priority Shipping",
 					"discountable" => false
@@ -110,7 +110,7 @@ class SP_Sub extends Stripepress {
 			if ($tax) :
 				\Stripe\InvoiceItem::create(array(
 					"customer" => $customerID,
-					"amount" => 2200*($tax/100),
+					"amount" => 2100*($tax/100),
 					"currency" => "usd",
 					"description" => "Sales tax",
 					"discountable" => false

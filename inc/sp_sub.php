@@ -110,7 +110,7 @@ class SP_Sub extends Stripepress {
 			if ($tax) :
 				\Stripe\InvoiceItem::create(array(
 					"customer" => $customerID,
-					"amount" => 2100*($tax/100),
+					"amount" => round(2500*($tax/100)),
 					"currency" => "usd",
 					"description" => "Sales tax",
 					"discountable" => false

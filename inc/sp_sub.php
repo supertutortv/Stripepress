@@ -17,6 +17,16 @@ class SP_Sub extends Stripepress {
 			 * Get Plan metadata, where we've stored the appropriate WP role
 			**/
 
+			$coupon = sanitize_text_field($output['sttv_coupon'] ?: '');
+			$cp = \Stripe\Coupon::retrieve( $coupon );
+			if ( !$cp->valid ) {
+				echo wp_send_json_error([
+					'error'=>'invalid_request_error',
+					'message'=>'Invalid coupon'
+				]);
+				die;
+			}
+
 			$planID = ($_POST['plan']) ?: '10789';
 
 			$plan = \Stripe\Plan::retrieve($planID);
@@ -29,7 +39,6 @@ class SP_Sub extends Stripepress {
 			$fullname = $firstname . ' ' . $lastname;
 			$email = sanitize_email($output['sttv_email']);
 			$phone = $output['sttv_phone'];
-			$coupon = sanitize_text_field($output['sttv_coupon'] ?: '');
 			
 			$no_trial = $output['sttv_no_trial'];
 			$priority = (bool) $output['sttv_digital_book'];

@@ -127,10 +127,6 @@ class SP_Sub extends Stripepress {
 			  "customer" => $customerID,
 			  "plan" => $planID
 			);
-
-			if (!empty($coupon)) {
-				$sub_array['coupon'] = $coupon;
-			}
 			
 			if ($no_trial) {
 				$sub_array['trial_end'] = now;

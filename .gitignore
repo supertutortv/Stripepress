@@ -1,2 +1,4 @@
 
 .DS_Store
+inc/access.log
+inc/vimstor.php

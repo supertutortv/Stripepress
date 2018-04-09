@@ -18,8 +18,8 @@ class SP_Events {
 		
 		// set up Stripe environment
 		\Stripe\Stripe::setApiKey(Spress()->secret_key);
-		//$ep_sec = 'whsec_qgpr4DPFf4aOoo6HYzyoKehHMTZJgYf2'; //test
-		$ep_sec = 'whsec_KHUM6iWBhupnnmrwfxOnzt8bNzFz1rQc'; //live
+		//$ep_sec = STRIPE_WHSEC_TEST; //test
+		$ep_sec = STRIPE_WHSEC_LIVE; //live
 		$sig_header = @$_SERVER["HTTP_STRIPE_SIGNATURE"];
 		$event = null;
 		
